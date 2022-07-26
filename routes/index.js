@@ -19,6 +19,8 @@ router.get('/signin', userController.signInPage)
 router.post('/signin', passport.authenticate('local', { failureRedirect: '/signin', failureFlash: true }), userController.signIn)
 router.get('/logout', authenticatedUser, userController.logout)
 
+router.post('/following/:userId', authenticatedUser, userController.addFollowing)
+router.delete('/following/:userId', authenticatedUser, userController.removeFollowing)
 router.get('/tweets', authenticatedUser, tweetController.getTweets)
 router.get('/reply', authenticatedUser, tweetController.getReply)
 router.use('/', (req, res) => {

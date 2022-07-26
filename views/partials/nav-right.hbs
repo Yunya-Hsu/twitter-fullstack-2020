@@ -1,20 +1,44 @@
-<div class="card border-light sticky-top" style="width: 18rem;">
+<div class="card border-light sticky-top" style="width: 18rem; font-family: 'Noto Sans TC'; font-style: normal;">
   <div class="card-header border-light" style="background-color: white;">
     <h5 style="font-weight: bold; font-family:'Noto Sans TC', sans-serif;">推薦跟隨</h5>
   </div>
+
   <ul class="list-group list-group-flush " style="border:none;">
+    {{#each users}}
     <li class="list-group-item border-light" style="height: 70px;">
       <div>
-        <img class="d-inline-block mb-4 " src="images/img.png" alt="" style="width: 50px; " class="me-3">
-        <div class="d-inline-block me-3">
-          <span class="d-block" style="width:83px; font-weight: bold; white-space: nowrap;">Pizza Hut</span>
-          <small class="d-block" style="width:88px; white-space: nowrap;">@pizzahut</small>
+        <img class="d-inline-block mb-4 " src="images/img.png" alt="" style="width: 50px; heught:50px" class="me-3">
+        <div class="d-inline-block">
+          <span class="d-block pt-1" style="width:54px; height:26px; font-weight: 700;font-size: 16px;line-height: 26px;">{{this.name}}</span>
+          <small class="d-block" style="width:51px; height:21px; font-weight: 500;font-size: 14px;line-height: 22px;">@{{this.account}}</small>
         </div>
-        <a class="btn btn-primary border border-light rounded-pill mb-4 " href="#" role="button"
-          style="background-color: #FF6600; ">正在跟隨</a>
+          {{#if this.isFollowed }}
+          <form action="/following/{{this.id}}?_method=DELETE" method="POST" style="display: contents;">
+            <button type="submit" class="btn btn-primary border border-light rounded-pill mb-4 "
+              style="background-color: #FF6600;">正在跟隨</button>
+          </form>
+          {{else}}
+          <form action="/following/{{this.id}}" method="POST" style="display: contents;">
+          <button type="submit" class="btn btn-primary rounded-pill mb-4"style="background-color: #FFFFFF; color:#FF6600; border:#FF6600 solid 1px; margin-left:30px;">跟隨</button>
+          </form>
+          {{/if}}
       </div>
     </li>
-    <li class="list-group-item border-light" style="height: 70px;">
+    {{/each}}
+    {{!-- <li class="list-group-item border-light" style="height: 70px;">
+      <div>
+        <img class="d-inline-block mb-4 " src="images/img.png" alt="" style="width: 50px;" class="me-3">
+        <div class="d-inline-block me-3">
+          <span class="d-block" style="width:83px; font-weight: bold; white-space: nowrap;">McDona...</span>
+          <small class="d-block" style="width:88px; white-space: nowrap;">@McDona...</small>
+        </div>
+      <form action="/following/{{this.id}}?_method=DELETE" method="POST" style="display: contents;">
+        <button type="submit" class="btn btn-primary border border-light rounded-pill mb-4 "
+          style="background-color: #FF6600;">正在跟隨</button>
+      </form>
+      </div>
+    </li> --}}
+    {{!-- <li class="list-group-item border-light" style="height: 70px;">
       <div>
         <img class="d-inline-block mb-4 " src="images/img.png" alt="" style="width: 50px;" class="me-3">
         <div class="d-inline-block me-3">
@@ -90,6 +114,6 @@
         <a class="btn btn-primary rounded-pill mb-4 " href="#" role="button"
           style="background-color: #FFFFFF; color:#FF6600; border:#FF6600 solid 1px; ">跟隨</a>
       </div>
-    </li>
+    </li> --}}
   </ul>
 </div>
