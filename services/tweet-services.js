@@ -3,7 +3,9 @@ const { User } = require('../models')
 const tweetServices = {
   getFollowing: (req, cb) => {
     return User.findAll({
-      include: [{ model: User, as: 'Followers' }]
+      include: [{ model: User, as: 'Followers' }],
+      limit: 10,
+      order: [['createdAt', 'DESC']]
     })
       .then(users => {
         users = users.map(user => ({
