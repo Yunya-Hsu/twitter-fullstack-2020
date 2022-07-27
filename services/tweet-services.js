@@ -1,4 +1,5 @@
 const { User } = require('../models')
+
 const tweetServices = {
   getFollowing: (req, cb) => {
     return User.findAll({

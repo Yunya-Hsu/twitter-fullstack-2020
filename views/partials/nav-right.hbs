@@ -13,107 +13,16 @@
           <small class="d-block" style="width:51px; height:21px; font-weight: 500;font-size: 14px;line-height: 22px;">@{{this.account}}</small>
         </div>
           {{#if this.isFollowed }}
-          <form action="/following/{{this.id}}?_method=DELETE" method="POST" style="display: contents;">
-            <button type="submit" class="btn btn-primary border border-light rounded-pill mb-4 "
-              style="background-color: #FF6600;">正在跟隨</button>
+          <form action="/followships/{{this.id}}?_method=DELETE" method="POST" style="display: contents;">
+            <button type="submit" name="id" value="{{this.id}}" class="btn btn-primary border border-light rounded-pill mb-4"style="background-color: #FF6600;">正在跟隨</button>
           </form>
           {{else}}
-          <form action="/following/{{this.id}}" method="POST" style="display: contents;">
-          <button type="submit" class="btn btn-primary rounded-pill mb-4"style="background-color: #FFFFFF; color:#FF6600; border:#FF6600 solid 1px; margin-left:30px;">跟隨</button>
+          <form action="/followships" method="POST" style="display: contents;">
+          <button type="submit" name="id" value="{{this.id}}" class="btn btn-primary rounded-pill mb-4"style="background-color: #FFFFFF; color:#FF6600; border:#FF6600 solid 1px; margin-left:30px;">跟隨</button>
           </form>
           {{/if}}
       </div>
     </li>
     {{/each}}
-    {{!-- <li class="list-group-item border-light" style="height: 70px;">
-      <div>
-        <img class="d-inline-block mb-4 " src="images/img.png" alt="" style="width: 50px;" class="me-3">
-        <div class="d-inline-block me-3">
-          <span class="d-block" style="width:83px; font-weight: bold; white-space: nowrap;">McDona...</span>
-          <small class="d-block" style="width:88px; white-space: nowrap;">@McDona...</small>
-        </div>
-      <form action="/following/{{this.id}}?_method=DELETE" method="POST" style="display: contents;">
-        <button type="submit" class="btn btn-primary border border-light rounded-pill mb-4 "
-          style="background-color: #FF6600;">正在跟隨</button>
-      </form>
-      </div>
-    </li> --}}
-    {{!-- <li class="list-group-item border-light" style="height: 70px;">
-      <div>
-        <img class="d-inline-block mb-4 " src="images/img.png" alt="" style="width: 50px;" class="me-3">
-        <div class="d-inline-block me-3">
-          <span class="d-block" style="width:83px; font-weight: bold; white-space: nowrap;">McDona...</span>
-          <small class="d-block" style="width:88px; white-space: nowrap;">@McDona...</small>
-        </div>
-        <a class="btn btn-primary border border-light rounded-pill mb-4 " href="#" role="button"
-          style="background-color: #FF6600; ">正在跟隨</a>
-      </div>
-    </li>
-    <li class="list-group-item border-light" style="height: 70px;">
-      <div>
-        <img class="d-inline-block mb-4 " src="images/img.png" alt="" style="width: 50px;" class="me-3">
-        <div class="d-inline-block me-5">
-          <span class="d-block" style="width:83px; font-weight: bold; white-space: nowrap;">Bank of ...</span>
-          <small class="d-block" style="width:88px; white-space: nowrap;">@BankOfA ...</small>
-        </div>
-        <a class="btn btn-primary rounded-pill mb-4 " href="#" role="button"
-          style="background-color: #FFFFFF; color:#FF6600; border:#FF6600 solid 1px; ">跟隨</a>
-      </div>
-    </li>
-    <li class="list-group-item border-light" style="height: 70px;">
-      <div>
-        <img class="d-inline-block mb-4 " src="images/img.png" alt="" style="width: 50px;" class="me-3">
-        <div class="d-inline-block me-5">
-          <span class="d-block" style="width:83px; font-weight: bold; white-space: nowrap;">L'Oréal</span>
-          <small class="d-block" style="width:88px; white-space: nowrap;">@Loreal</small>
-        </div>
-        <a class="btn btn-primary rounded-pill mb-4 " href="#" role="button"
-          style="background-color: #FFFFFF; color:#FF6600; border:#FF6600 solid 1px; ">跟隨</a>
-      </div>
-    </li>
-    <li class="list-group-item border-light" style="height: 70px;">
-      <div>
-        <img class="d-inline-block mb-4 " src="images/img.png" alt="" style="width: 50px;" class="me-3">
-        <div class="d-inline-block me-5">
-          <span class="d-block" style="width:83px; font-weight: bold; white-space: nowrap;">Nintendo</span>
-          <small class="d-block" style="width:88px; white-space: nowrap;">@Nintendo</small>
-        </div>
-        <a class="btn btn-primary rounded-pill mb-4 " href="#" role="button"
-          style="background-color: #FFFFFF; color:#FF6600; border:#FF6600 solid 1px; ">跟隨</a>
-      </div>
-    </li>
-    <li class="list-group-item border-light" style="height: 70px;">
-      <div>
-        <img class="d-inline-block mb-4 " src="images/img.png" alt="" style="width: 50px;" class="me-3">
-        <div class="d-inline-block me-5">
-          <span class="d-block" style="width:83px; font-weight: bold; white-space: nowrap;">MasterCard</span>
-          <small class="d-block" style="width:88px; white-space: nowrap;">@MasterCard</small>
-        </div>
-        <a class="btn btn-primary rounded-pill mb-4 " href="#" role="button"
-          style="background-color: #FFFFFF; color:#FF6600; border:#FF6600 solid 1px; ">跟隨</a>
-      </div>
-    </li>
-    <li class="list-group-item border-light" style="height: 70px;">
-      <div>
-        <img class="d-inline-block mb-4 " src="images/img.png" alt="" style="width: 50px;" class="me-3">
-        <div class="d-inline-block me-5">
-          <span class="d-block" style="width:83px; font-weight: bold; white-space: nowrap;">Nike</span>
-          <small class="d-block" style="width:88px; white-space: nowrap;">@Nike</small>
-        </div>
-        <a class="btn btn-primary rounded-pill mb-4 " href="#" role="button"
-          style="background-color: #FFFFFF; color:#FF6600; border:#FF6600 solid 1px; ">跟隨</a>
-      </div>
-    </li>
-    <li class="list-group-item border-light" style="height: 70px;">
-      <div>
-        <img class="d-inline-block mb-4 " src="images/img.png" alt="" style="width: 50px;" class="me-3">
-        <div class="d-inline-block me-5">
-          <span class="d-block" style="width:83px; font-weight: bold; white-space: nowrap;">Adidas</span>
-          <small class="d-block" style="width:88px; white-space: nowrap;">@Adidas</small>
-        </div>
-        <a class="btn btn-primary rounded-pill mb-4 " href="#" role="button"
-          style="background-color: #FFFFFF; color:#FF6600; border:#FF6600 solid 1px; ">跟隨</a>
-      </div>
-    </li> --}}
   </ul>
 </div>
