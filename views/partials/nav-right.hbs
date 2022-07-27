@@ -7,20 +7,32 @@
     {{#each users}}
     <li class="list-group-item border-light" style="height: 70px;">
       <div>
-        <img class="d-inline-block mb-4 " src="images/img.png" alt="" style="width: 50px; heught:50px" class="me-3">
+        <a href="/users/{{this.id}}" style="text-decoration: none;">
+          <img class="d-inline-block mb-4 " src="images/img.png" alt="" style="width: 50px; heught:50px" class="me-3">
+        </a>
         <div class="d-inline-block">
-          <span class="d-block pt-1" style="width:54px; height:26px; font-weight: 700;font-size: 16px;line-height: 26px;">{{this.name}}</span>
-          <small class="d-block" style="width:51px; height:21px; font-weight: 500;font-size: 14px;line-height: 22px;">@{{this.account}}</small>
+          <a href="/users/{{this.id}}" style="text-decoration: none; color:black;">
+            <span class="d-block pt-1"
+              style="width:54px; height:26px; font-weight: 700;font-size: 16px;line-height: 26px;">{{this.name}}
+            </span>
+          </a>
+          <a href="/users/{{this.id}}" style="text-decoration: none; color:black;">
+          <small class="d-block" style="width:51px; height:21px; font-weight: 500;font-size: 14px;line-height: 22px;">@{{this.account}}
+          </small>
+          </a>
         </div>
-          {{#if this.isFollowed }}
-          <form action="/followships/{{this.id}}?_method=DELETE" method="POST" style="display: contents;">
-            <button type="submit" name="id" value="{{this.id}}" class="btn btn-primary border border-light rounded-pill mb-4"style="background-color: #FF6600;">正在跟隨</button>
-          </form>
-          {{else}}
-          <form action="/followships" method="POST" style="display: contents;">
-          <button type="submit" name="id" value="{{this.id}}" class="btn btn-primary rounded-pill mb-4"style="background-color: #FFFFFF; color:#FF6600; border:#FF6600 solid 1px; margin-left:30px;">跟隨</button>
-          </form>
-          {{/if}}
+        {{#if this.isFollowed }}
+        <form action="/followships/{{this.id}}?_method=DELETE" method="POST" style="display: contents;">
+          <button type="submit" name="id" value="{{this.id}}"
+            class="btn btn-primary border border-light rounded-pill mb-4"
+            style="background-color: #FF6600;">正在跟隨</button>
+        </form>
+        {{else}}
+        <form action="/followships" method="POST" style="display: contents;">
+          <button type="submit" name="id" value="{{this.id}}" class="btn btn-primary rounded-pill mb-4"
+            style="background-color: #FFFFFF; color:#FF6600; border:#FF6600 solid 1px; margin-left:30px;">跟隨</button>
+        </form>
+        {{/if}}
       </div>
     </li>
     {{/each}}
