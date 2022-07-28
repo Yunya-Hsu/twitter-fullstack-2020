@@ -7,6 +7,7 @@ const admin = require('./modules/admin')
 
 const userController = require('../controllers/user-controller')
 const tweetController = require('../controllers/tweet-controller')
+const likeController = require('../controllers/like-controller')
 
 const { authenticatedUser } = require('../middleware/auth')
 const { generalErrorHandler } = require('../middleware/error-handler')
@@ -20,6 +21,8 @@ router.post('/signin', passport.authenticate('local', { failureRedirect: '/signi
 router.get('/logout', authenticatedUser, userController.logout)
 
 router.get('/tweets', authenticatedUser, tweetController.getTweets)
+
+router.get('/users/1/likes', likeController.getUserLike)
 
 router.use('/', (req, res) => {
   res.redirect('/tweets')
