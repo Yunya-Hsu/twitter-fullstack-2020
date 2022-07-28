@@ -1,0 +1,70 @@
+<div class="col-2 nav-left">
+  {{> nav-left}}
+</div>
+
+<div class="col-8 nav-body" style="font-family: 'Noto Sans TC'; font-style: normal;">
+  <ul class="list-group" class="me-3">
+    <li class="list-group-item border-light">
+      <a type="button" href="/" style="margin-left:8px;">
+        <img src="/images/backArrow.png" alt="Can't 顯示" style="width: 17px; height:14px;" class="align-top me-3 mt-1">
+      </a>
+      <h2 class="d-inline" style="font-size: 24px; font-family: 'Noto Sans TC';font-weight: 700;line-height: 26px;"
+        class="">推文</h2>
+    </li>
+    <li class="list-group-item border-light" style="">
+      <a href="#" type="button">
+        <img class="d-inline-block mb-4 " src="/images/img.png" alt="Can't 顯示" style="width: 50px; " class="me-3">
+      </a>
+      <div class="d-inline-block me-3">
+        <a href="#" class="d-block"
+          style="width:83px; font-weight: bold; white-space: nowrap; color:#171725; text-decoration:none;margin-left:2px;">{{tweet.User.name}}</a>
+        <small class="d-block" style="width:88px; white-space: wrap; color:#6C757D;">@{{tweet.User.account}}</small>
+      </div>
+      <div>
+        <p style="font-weight: 400;font-size: 24px;line-height: 36px; color:#6C757D;">
+          {{tweet.description}}
+        </p>
+      </div>
+      <footer style="font-weight: 500;font-size: 14px;line-height: 22px; color:#6C757D;">{{dateFormat tweet.createdAt
+        "上午h:MM・YYYY年MM月DD日"}}</footer>
+    </li>
+    <li class="list-group-item d-flex align-items-start border-light">
+      <p style="width: 67px;height: 28px;font-family: 'Montserrat';font-weight: 700;
+font-size: 19px; margin: 0;" class="text-nowrap mt-1 me-4">{{tweet.Replies.length}}
+        <span class="text-muted"> 回覆</span>
+      </p>
+      <p style="width: 67px;height: 28px;font-family: 'Montserrat';font-weight: 700;
+font-size: 19px; margin: 0;" class="text-nowrap mt-1">808
+        <span class="text-muted"> 喜歡次數</span>
+      </p>
+    </li>
+    <li class="list-group-item d-flex align-items-start border-light">
+      <img src="/images/chat.png" alt="Can't 顯示" style="width: 24.69px; height:24.69px;" class="me-5">
+      <img src="/images/love.png" alt="Can't 顯示" style="width: 24.69px; height:24.69px; margin-left:90px">
+    </li>
+
+    {{#each tweet.Replies}}
+    <li class="list-group-item d-flex align-items-start border-light">
+      <img src="/images/img.png" alt="Can't 顯示" style="width:50px;" class="me-3">
+      <div>
+        <a href="#" style="text-decoration:none;">
+          <p class="d-inline" style="font-weight: 700;font-size: 16px;line-height: 26px;color:#171725;">
+            {{this.User.name}}</p>
+        </a>
+        <small class="m-2" style="color:#6C757D;">@{{this.User.account}}・3 小時</small></a>
+        <span class="d-block mt-1 mb-1" style="font-weight: 400;font-size: 14px;line-height: 22px; color:#6C757D;">回覆
+          <a href="#" style="text-decoration:none;">
+            {{#if ../tweet.User}}
+            <small style="color:#FF6600;margin-left:2px;">@{{../tweet.User.account}}</small>
+            {{/if}}
+          </a>
+        </span>
+        <p style="font-weight: 400;font-size: 16px;line-height: 26px; color: #171725;">{{this.comment}}</p>
+      </div>
+    </li>
+    {{/each}}
+  </ul>
+</div>
+<div class="col-2 nav-right">
+  {{> nav-right}}
+</div>
