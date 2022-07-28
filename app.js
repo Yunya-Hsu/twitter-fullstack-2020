@@ -10,10 +10,14 @@ const routes = require('./routes')
 const app = express()
 const port = 3000
 
+<<<<<<< HEAD
 // use helpers.getUser(req) to replace req.user
 // use helpers.ensureAuthenticated(req) to replace req.isAuthenticated()
 
 app.engine('hbs', exphbs({ extname: '.hbs', helpers: handlebarsHelpers }))
+=======
+app.engine('hbs', exphbs({ extname: '.hbs' }))
+>>>>>>> 88483396fec96cde0f0af3cad528ad0a66306b9b
 app.set('view engine', 'hbs')
 app.use(express.static('public'))
 
