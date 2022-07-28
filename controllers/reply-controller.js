@@ -17,7 +17,6 @@ const replyController = {
       })
     ])
       .then(([tweet, users]) => {
-      // .then(tweet => {
         if (!tweet) throw new Error("tweet didn't exist!")
         users = users.map(user => ({
           ...user.toJSON()
