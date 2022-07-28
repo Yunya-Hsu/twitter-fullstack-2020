@@ -1,14 +1,14 @@
-<div class="card border-light sticky-top" style="width: 18rem; font-family: 'Noto Sans TC'; font-style: normal;">
-  <div class="card-header border-light" style="background-color: white;">
-    <h5 style="font-weight: bold; font-family:'Noto Sans TC', sans-serif;">推薦跟隨</h5>
+<div class="card border-light sticky-top mt-3" style="width: 18rem; font-family: 'Noto Sans TC'; font-style: normal;border-radius: 16px;">
+  <div class="card-header border-light">
+    <h5 class="mt-2" style="font-weight: bold; font-family:'Noto Sans TC', sans-serif;">推薦跟隨</h5>
   </div>
 
   <ul class="list-group list-group-flush " style="border:none;">
     {{#each users}}
-    <li class="list-group-item border-light" style="height: 70px;">
+    <li class="list-group-item border-light" style="height: 70px; background-color:#FAFAFB;">
       <div>
         <a href="/users/{{this.id}}" style="text-decoration: none;">
-          <img class="d-inline-block mb-4 " src="images/img.png" alt="" style="width: 50px; heught:50px" class="me-3">
+          <img class="d-inline-block mb-4 " src="images/img.png" alt="" style="width: 45px; heught:45px" class="me-3">
         </a>
         <div class="d-inline-block">
           <a href="/users/{{this.id}}" style="text-decoration: none; color:black;">

@@ -56,7 +56,6 @@ const userController = {
       raw: true
     })
       .then(user => {
-        console.log(user)
         if (!user) throw new Error("User didn't exist!")
         res.render('profile', { user })
       })

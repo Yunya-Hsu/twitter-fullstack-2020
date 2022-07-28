@@ -1,5 +1,5 @@
 const { User } = require('../models')
-
+const helpers = require('../_helpers')
 const tweetServices = {
   getFollowing: (req, cb) => {
     return User.findAll({
@@ -15,7 +15,7 @@ const tweetServices = {
         }))
         const filterSelfUser = []
         users = users.forEach(user => {
-          if (user.id !== req.user.id) {
+          if (user.id !== helpers.getUser(req).id && user.role !== 'admin') {
             filterSelfUser.push(user)
           }
         })
