@@ -1,14 +1,12 @@
 const express = require('express')
+const helpers = require('./_helpers')
 const exphbs = require('express-handlebars')
 const session = require('express-session')
 const flash = require('connect-flash')
 const methodOverride = require('method-override')
-
-// const helpers = require('./_helpers')
 const passport = require('./config/passport')
 const handlebarsHelpers = require('./helpers/handlebars-helpers')
 const routes = require('./routes')
-
 const app = express()
 const port = 3000
 
@@ -30,6 +28,7 @@ app.use(methodOverride('_method'))
 app.use((req, res, next) => {
   res.locals.success_messages = req.flash('success_messages')
   res.locals.error_messages = req.flash('error_messages')
+  res.locals.user = helpers.getUser(req)
   next()
 })
 

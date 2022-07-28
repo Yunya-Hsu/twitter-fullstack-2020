@@ -1,5 +1,4 @@
 const bcrypt = require('bcryptjs')
-
 const { User } = require('../models')
 
 const userController = {
@@ -50,8 +49,18 @@ const userController = {
     req.flash('success_messages', '登出成功！')
     req.logout()
     res.redirect('/signin')
+  },
+  getProfile: (req, res, next) => {
+    return User.findByPk(req.params.userId, {
+      nest: true,
+      raw: true
+    })
+      .then(user => {
+        if (!user) throw new Error("User didn't exist!")
+        res.render('profile', { user })
+      })
+      .catch(err => next(err))
   }
-
 }
 
 module.exports = userController
