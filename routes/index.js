@@ -22,7 +22,8 @@ router.get('/logout', authenticatedUser, userController.logout)
 
 router.get('/tweets', authenticatedUser, tweetController.getTweets)
 
-router.get('/users/1/likes', likeController.getUserLike)
+router.get('/users/:id/likes', authenticatedUser, likeController.getUserLike)
+router.post('/tweets/:id/like', authenticatedUser, likeController.postLike)
 
 router.use('/', (req, res) => {
   res.redirect('/tweets')

@@ -1,4 +1,4 @@
-const { Tweet } = require('../models')
+const { Tweet, Like } = require('../models')
 const helpers = require('../_helpers')
 
 const likeController = {
@@ -11,6 +11,22 @@ const likeController = {
 
                 res.json({ status: 'success', ...tweets })
             })
+            .catch(err => next(err))
+    },
+    postLike: (req, res, next) => {
+        const tweetId = Number(req.params.id)
+        const userId = Number(helpers.getUser(req))
+
+        return Tweet.findByPk(tweetId)
+            .then(tweet => {
+                if (!tweet) throw new Error("This tweet isn't Existed.")
+
+                return Like.create({
+                    UserId: userId,
+                    TweetId: tweetId
+                })
+            })
+            .then(() => res.redirect('back'))
             .catch(err => next(err))
     }
 }
