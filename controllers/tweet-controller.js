@@ -1,4 +1,4 @@
-const { User } = require('../models')
+const { User, Tweet } = require('../models')
 const helpers = require('../_helpers')
 const tweetController = {
   getTweets: (req, res, next) => {
@@ -20,6 +20,16 @@ const tweetController = {
         users = filterSelfUser.sort((a, b) => b.followerCount - a.followerCount).slice(0, 10)
         return res.render('index', { users })
       })
+      .catch(err => next(err))
+  },
+  postTweet: (req, res, next) => {
+    const userId = Number(helpers.getUser(req).id)
+    const { description } = req.body
+    if (!description) throw new Error("Description didn't exist!")
+    if (description.length > 140) throw new Error('Description too long!')
+
+    return Tweet.create({ UserId: userId, description })
+      .then(() => res.redirect('/'))
       .catch(err => next(err))
   }
 }
