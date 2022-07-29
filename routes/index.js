@@ -20,10 +20,11 @@ router.get('/signin', userController.signInPage)
 router.post('/signin', passport.authenticate('local', { failureRedirect: '/signin', failureFlash: true }), userController.signIn)
 router.get('/logout', authenticatedUser, userController.logout)
 
-router.get('/tweets', authenticatedUser, tweetController.getTweets)
-
 router.get('/users/:id/likes', authenticatedUser, likeController.getUserLike)
 router.post('/tweets/:id/like', authenticatedUser, likeController.postLike)
+router.post('/tweets/:id/unlike', authenticatedUser, likeController.postUnlike)
+
+router.get('/tweets', authenticatedUser, tweetController.getTweets)
 
 router.use('/', (req, res) => {
   res.redirect('/tweets')

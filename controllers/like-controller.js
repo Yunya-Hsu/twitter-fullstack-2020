@@ -28,6 +28,19 @@ const likeController = {
       })
       .then(() => res.redirect('back'))
       .catch(err => next(err))
+  },
+  postUnlike: (req, res, next) => {
+    const userId = Number(helpers.getUser(req).id)
+    const tweetId = Number(req.params.id)
+
+    return Like.findOne({ where: { UserId: userId, TweetId: tweetId } })
+      .then(like => {
+        if (!like) throw new Error("You don't have liked this tweet.")
+
+        return like.destroy()
+      })
+      .then(() => res.redirect('back'))
+      .catch(err => next(err))
   }
 }
 
