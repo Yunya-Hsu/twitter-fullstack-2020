@@ -12,6 +12,7 @@ const likeController = require('../controllers/like-controller')
 
 const { authenticatedUser } = require('../middleware/auth')
 const { generalErrorHandler } = require('../middleware/error-handler')
+
 router.use('/tweets', authenticatedUser, tweets)
 router.use('/admin', admin)
 router.use('/followships', authenticatedUser, followships)
@@ -21,7 +22,6 @@ router.post('/signup', userController.signUp)
 router.get('/signin', userController.signInPage)
 router.post('/signin', passport.authenticate('local', { failureRedirect: '/signin', failureFlash: true }), userController.signIn)
 router.get('/logout', authenticatedUser, userController.logout)
-
 router.get('/users/:id/likes', authenticatedUser, likeController.getUserLike)
 
 router.use('/', (req, res) => {
