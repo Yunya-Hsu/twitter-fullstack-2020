@@ -30,12 +30,15 @@ const replyController = {
       .then(([tweet, users]) => {
         if (!tweet) throw new Error("tweet didn't exist!")
         tweet = JSON.parse(JSON.stringify(tweet))
-        const userInfo = tweet.User
         const likesNum = tweet.Likes.length
+        const userInfo = tweet.User
+        const currentUser = helpers.getUser(req)
         const likedTweetsId = helpers.getUser(req)?.LikeTweets ? helpers.getUser(req).LikeTweets.map(lt => lt.id) : []
         userInfo.isLiked = likedTweetsId.includes(tweet.id) ? tweet.isLiked = likedTweetsId.includes(tweet.id) : false
+        console.log(currentUser)
         users = users.map(user => ({
-          ...user.toJSON()
+          ...user.toJSON(),
+          isFollowed: helpers.getUser(req).Followings.some(f => f.id === user.id)
         }))
         const filterSelfAndAdminUser = []
         users = users.forEach(user => {
@@ -44,7 +47,7 @@ const replyController = {
           }
         })
         users = filterSelfAndAdminUser.sort((a, b) => b.followerCount - a.followerCount).slice(0, 10)
-        res.render('reply', { tweet, userInfo, likesNum })
+        res.render('reply', { users, tweet, userInfo, likesNum, currentUser })
       })
       .catch(err => next(err))
   },

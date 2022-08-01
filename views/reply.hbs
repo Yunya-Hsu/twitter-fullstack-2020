@@ -13,7 +13,8 @@
     </li>
     <li class="list-group-item border-light" style="">
       <a href="/users/{{userInfo.id}}" type="button">
-        <img class="d-inline-block mb-4" src="{{userInfo.avatar}}" alt="主推文樓主頭像" class="me-3">
+        <img class="d-inline-block mb-4 me-3" src="{{userInfo.avatar}}" alt="主推文樓主頭像"
+          style="width:50px; height:50px; border:#E6ECF0; border-radius:50%">
       </a>
       <div class="d-inline-block me-3">
         <a href="/users/{{userInfo.id}}" class="d-block "
@@ -21,9 +22,11 @@
         <small class="d-block" style="width:88px; white-space: wrap; color:#6C757D;">@{{userInfo.account}}</small>
       </div>
       <div>
-        <span style="word-wrap: break-word; width:578px; font-weight: 400;font-size: 24px;line-height: 36px; color:#6C757D; white-space:pre-wrap; text-decoration:none;">{{tweet.description}}</span>
+        <span
+          style="word-wrap: break-word; width:578px; font-weight: 400;font-size: 24px;line-height: 36px; color:#6C757D; white-space:pre-wrap; text-decoration:none;">{{tweet.description}}</span>
       </div>
-      <footer class="mt-2"style="font-weight: 500;font-size: 14px;line-height: 22px; color:#6C757D;">{{dateFormat tweet.createdAt
+      <footer class="mt-2" style="font-weight: 500;font-size: 14px;line-height: 22px; color:#6C757D;">{{dateFormat
+        tweet.createdAt
         "上午h:MM・YYYY年MM月DD日"}}</footer>
     </li>
     <li class="list-group-item d-flex align-items-start border-light">
@@ -36,43 +39,47 @@ font-size: 19px; margin: 0;" class="text-nowrap mt-1">{{likesNum}}
         <span class="text-muted"> 喜歡次數</span>
       </p>
     </li>
-    <li class="list-group-item d-flex align-items-start border-light">
-        {{!-- 第三橫列：reply & 按讚 --}}
-        <div style="font-size: 14px; color: #6C757D">
-          <i class="fa-regular fa-comment me-5 pointer" style="font-size: 24px" data-bs-toggle="modal"
-            data-bs-target="#post-reply" data-userid="{{tweet.User.id}}" data-username="{{tweet.User.name}}"
-            data-useraccount="{{tweet.User.account}}" data-tweetcreate="{{relativeTimeFromNow tweet.createdAt}}"
-            data-tweetdescription="{{tweet.description}}" data-tweetid="{{tweet.id}}" {{#if
-            tweet.User.avatar}}data-useravatar="{{tweet.User.avatar}}" {{else}}data-useravatar="/images/img.png" {{/if}} {{#if
-            ../user.avatar}}data-loginuseravatar="{{../user.avatar}}" {{else}}data-loginuseravatar="/images/img.png" {{/if}}>
-          </i>
-          <span>{{tweet.numberOfReply}}</span>
 
-          <div class="d-inline-block mb-1" style="padding-left: 35px;">
-            {{#if userInfo.isLiked}}
-            <form action="/tweets/1/unlike" method="POST" class="d-inline-block">
-              <button type="submit" style="all: unset; cursor: pointer;">
-                <i class="fa-solid fa-heart ms-4" style="font-size: 24px"></i>
-              </button>
-            </form>
-            {{else}}
-            <form action="/tweets/1/like" method="POST" class="d-inline-block">
-              <button type="submit" style="all: unset; cursor: pointer;">
-                <i class="fa-regular fa-heart ms-4" style="font-size: 24px"></i>
-              </button>
-            </form>
-            {{/if}}
-          </div>
+    {{!-- 第三橫列：reply & 按讚 --}}
+    <li class="list-group-item d-flex align-items-start border-light" id="tweets-panel">
+      <div style="font-size: 14px; color: #6C757D">
+        <i class="fa-regular fa-comment me-5 pointer" style="font-size: 24px" data-bs-toggle="modal"
+          data-bs-target="#post-reply" data-userid="{{userInfo.id}}" data-username="{{userInfo.name}}"
+          data-useraccount="{{userInfo.account}}" data-tweetcreate="{{relativeTimeFromNow tweet.createdAt}}"
+          data-tweetdescription="{{tweet.description}}" data-tweetid="{{tweet.id}}" {{#if
+          userInfo.avatar}}data-useravatar="{{userInfo.avatar}}" {{else}}data-useravatar="/images/img.png" {{/if}}
+          {{#if currentUser.avatar}}data-loginuseravatar="{{currentUser.avatar}}" {{else}}data-loginuseravatar="/images/img.png"
+          {{/if}}>
+        </i>
+        <span>{{tweet.numberOfReply}}</span>
+
+        <div class="d-inline-block mb-1" style="padding-left: 35px;">
+          {{#if userInfo.isLiked}}
+          <form action="/tweets/{{tweet.id}}/unlike" method="POST" class="d-inline-block">
+            <button type="submit" style="all: unset; cursor: pointer;">
+              <i class="fa-solid fa-heart ms-4" style="font-size: 24px"></i>
+            </button>
+          </form>
+          {{else}}
+          <form action="/tweets/{{tweet.id}}/like" method="POST" class="d-inline-block">
+            <button type="submit" style="all: unset; cursor: pointer;">
+              <i class="fa-regular fa-heart ms-4" style="font-size: 24px"></i>
+            </button>
+          </form>
+          {{/if}}
         </div>
+      </div>
     </li>
-
+  
     {{#each tweet.Replies}}
     <li class="list-group-item d-flex align-items-start border-light">
       <a href="/users/{{this.User.id}}" type="button">
-        <img src="{{this.User.avatar}}" alt="回覆人頭像" style="width:50px;" class="me-3">
+        <img src="{{this.User.avatar}}" alt="回覆人頭像" style="width:50px; height:50px; border:#E6ECF0; border-radius:50%"
+          class="me-3">
       </a>
       <div>
-        <a href="/users/{{this.User.id}}" style="text-decoration:none; font-weight: bold; white-space: nowrap; color:#171725; text-decoration:none;margin-left:2px;">
+        <a href="/users/{{this.User.id}}"
+          style="text-decoration:none; font-weight: bold; white-space: nowrap; color:#171725; text-decoration:none;margin-left:2px;">
           <p class="d-inline" style="font-weight: 700;font-size: 16px;line-height: 26px;color:#171725;">
             {{this.User.name}}</p>
         </a>

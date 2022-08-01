@@ -36,7 +36,6 @@ const tweetController = {
           tweet.numberOfLike = tweet.Likes.length
           tweet.isLiked = likedTweetsId.includes(tweet.id)
         }
-
         // 整理 users 只留被追蹤數排行前 10 者，nav-right 使用
         const followedUserId = helpers.getUser(req)?.Followings ? helpers.getUser(req).Followings.map(fu => fu.id) : [] // 先確認 req.user 是否存在，若存在檢查 Followings (該user追蹤的人) 是否存在。如果 Followers 存在則執行 map 撈出 user id 。若上述兩個不存在，回傳空陣列
         users = JSON.parse(JSON.stringify(users))
@@ -45,7 +44,6 @@ const tweetController = {
           user.isFollowed = followedUserId.includes(user.id)
         }
         users = users.sort((a, b) => b.numberOfFollowers - a.numberOfFollowers).slice(0, 10) // 只取排行前 10 的 users
-
         res.render('index', {
           user,
           tweets,
